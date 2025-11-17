@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import morgan from 'morgan';
 import userRoutes from './routes/user.routes.js';
+import postRoutes from './routes/post.routes.js';
 dotenv.config();
 connectDB();
 
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
