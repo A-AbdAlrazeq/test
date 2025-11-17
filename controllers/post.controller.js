@@ -10,10 +10,21 @@ export const getPosts = async (req, res) => {
   })
     res.json(posts);
   } */
-  const posts = await Post.find().or([
+ let page =1;
+ if (req.query.page) {
+  page = req.query.page;
+ }
+ let limit=0
+  if (req.query.limit) {
+  limit = req.query.limit;
+ }
+ let skip =(page-1)*limit;
+  const posts = await Post.find().sort({
+    createdAt: -1
+  }).or([
     { is_deleted: false },
     { is_deleted: { $exists: false } }
-  ])
+  ]).limit(limit).skip(skip);
     res.json(posts);
 }
    catch (err) {
