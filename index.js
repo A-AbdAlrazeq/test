@@ -1,12 +1,20 @@
 import express from 'express';
 import dotenv from 'dotenv';
 //import { connectDB } from './config/db.js';
-import { connectDB } from './config/postgresDb.js';
+import { connectDB as connectMongoDB } from './config/db.js';
+import { connectDB as connectPostgresDB } from './config/postgresDb.js';
 import morgan from 'morgan';
 import userRoutes from './routes/user.routes.js';
 import postRoutes from './routes/post.routes.js';
 dotenv.config();
-connectDB();
+
+const DB_CLIENT = process.env.DB_CLIENT || 'mongo';
+
+if (DB_CLIENT === 'postgres') {
+    connectPostgresDB();
+} else {
+    connectMongoDB();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;

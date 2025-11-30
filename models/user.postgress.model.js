@@ -1,5 +1,5 @@
-import { Sequelize,DataTypes } from 'sequelize';
-const sequelize = new Sequelize('sqlite::memory:');
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../config/postgresDb.js';
 
 const User = sequelize.define(
   'User',
@@ -16,8 +16,11 @@ const User = sequelize.define(
   },
   {
     // Other model options go here
+    timestamps: true,
   },
 );
 
 // `sequelize.define` also returns the model
 console.log(User === sequelize.models.User); // true
+
+export default User;
