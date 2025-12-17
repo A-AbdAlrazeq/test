@@ -16,6 +16,18 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   mongo_data:
+  postgres_data:
