@@ -1,0 +1,16 @@
+### Get all posts
+GET http://localhost:3000/api/posts
+Accept: application/json
+
+### Create a post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "My first post",
+  "content": "Hello from the API"
+}
+
+### Get a single post (replace :id with a real ID from the create response)
+GET http://localhost:3000/api/posts/:id
+Accept: application/json
